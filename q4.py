@@ -116,5 +116,5 @@ def generate_figure(length_OA, length_AB, length_BC, angle, force):
 
 if __name__ == "__main__":
   fig, ax = generate_figure(3, 6, 4, 30, 1500)
-  plt.savefig("engineering_statics_diagram.png", dpi=300, bbox_inches='tight')
+  plt.savefig("q4.png", dpi=300, bbox_inches='tight')
   plt.show()
