@@ -71,7 +71,7 @@ def generate_figure(length_OA, length_AB, length_BC, angle, force):
 
   ### Force vector at the end of BC ###
   # Write Theta
-  ax.annotate("\u03B8", xy=(x2_in + 0.4*length_BC, y2_in + 0.15*bar_length_BC*math.sin(math.radians(angle))), fontsize=18, color="black", fontfamily='times new roman')
+  ax.annotate("\u03B8", xy=(x2_in + 0.5*length_BC, y2_in + 0.2*bar_length_BC*math.sin(math.radians(angle))), fontsize=18, color="black", fontfamily='times new roman')
   # Draw dashed line extending from BC outer edge
   ax.plot([(x2_out+x2_in)/2, (x2_out+x2_in)/2 + 0.5*bar_length_BC], [(y2_out+y2_in)/2, (y2_out+y2_in)/2], linestyle="--", color="black")
   # Draw arc
@@ -86,7 +86,7 @@ def generate_figure(length_OA, length_AB, length_BC, angle, force):
   # Draw line
   ax.plot([length_OA, length_OA], [1.2*baseline, 2.2], linestyle="--", color="black")
   # Write text
-  ax.text(length_OA, 1.2*baseline-0.03*(length_OA+length_AB+1.6*length_BC), "a", fontsize=18, color="black", fontfamily='times new roman', weight='bold', ha='center')
+  ax.text(length_OA, 1.25*baseline-0.3, "a", fontsize=18, color="black", fontfamily='times new roman', weight='bold', ha='center')
 
   ### Distance measurements ###
   # Draw arrow for distance between OA
@@ -118,6 +118,6 @@ def generate_figure(length_OA, length_AB, length_BC, angle, force):
 
 
 if __name__ == "__main__":
-  fig, ax = generate_figure(2, 6, 6, 45, 1500)
+  fig, ax = generate_figure(2, 4, 15, 30, 1500)
   plt.savefig("q4.png", dpi=300, bbox_inches='tight')
   plt.show()
