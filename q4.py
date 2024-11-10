@@ -5,11 +5,13 @@ import math
 
 def generate_figure(length_OA, length_AB, length_BC, angle, force):
   BAR_WIDTH = 0.5
+  arrow_head_width = 0.2 #0.01*(length_OA+length_AB+1.6*length_BC)
+  arrow_head_length = 0.2 #0.01*(length_OA+length_AB+1.6*length_BC)
   # Set up the figure and axis
   fig, ax = plt.subplots(figsize=(10, 5))
   ax.set_aspect('equal')
-  ax.set_xlim(-1, 20)
-  ax.set_ylim(-5.5, 5.5)
+  ax.set_xlim(-1, length_OA+length_AB+1.6*length_BC)
+  ax.set_ylim(-5-length_BC*math.tan(math.radians(angle)), 5)
   ax.axis('off')
 
   ### Support at left end ###
@@ -69,43 +71,44 @@ def generate_figure(length_OA, length_AB, length_BC, angle, force):
 
   ### Force vector at the end of BC ###
   # Write Theta
-  ax.annotate("\u03B8", xy=(x2_in + 1.5, y2_in + 0.2*bar_length_BC*math.sin(math.radians(angle))), fontsize=18, color="black", fontfamily='times new roman')
+  ax.annotate("\u03B8", xy=(x2_in + 0.4*length_BC, y2_in + 0.15*bar_length_BC*math.sin(math.radians(angle))), fontsize=18, color="black", fontfamily='times new roman')
   # Draw dashed line extending from BC outer edge
-  ax.plot([(x2_out+x2_in)/2, (x2_out+x2_in)/2 + 2], [(y2_out+y2_in)/2, (y2_out+y2_in)/2], linestyle="--", color="black")
+  ax.plot([(x2_out+x2_in)/2, (x2_out+x2_in)/2 + 0.5*bar_length_BC], [(y2_out+y2_in)/2, (y2_out+y2_in)/2], linestyle="--", color="black")
   # Draw arc
-  ax.add_patch(Arc(((x2_out+x2_in)/2, (y2_out+y2_in)/2), 2, 2, angle=0, theta1=0, theta2=angle, color="black"))
+  ax.add_patch(Arc(((x2_out+x2_in)/2, (y2_out+y2_in)/2), 0.5*bar_length_BC, 0.5*bar_length_BC, angle=0, theta1=0, theta2=angle, color="black"))
   # Draw arrow at the end of the arc pointing in the direction of angle theta2
-  ax.arrow((x2_out+x2_in)/2, (y2_out+y2_in)/2, 2*math.cos(math.radians(angle)), 2*math.sin(math.radians(angle)), head_width=0.2, head_length=0.2, color="black")
+  ax.arrow((x2_out+x2_in)/2, (y2_out+y2_in)/2, 0.5*bar_length_BC*math.cos(math.radians(angle)), 0.5*bar_length_BC*math.sin(math.radians(angle)), head_width=0.01*(length_OA+length_AB+1.6*length_BC), head_length=0.01*(length_OA+length_AB+1.6*length_BC), color="black")
   # Write Force at the end of arrow
-  ax.text((x2_out+x2_in)/2 + math.cos(math.radians(angle)), (y2_out+y2_in)/2 + 2*math.sin(math.radians(angle))+0.3, f"{force} N", fontsize=18, color="black", fontfamily='times new roman')
+  ax.text((x2_out+x2_in)/2 + 0.5*bar_length_BC*math.cos(math.radians(angle)), (y2_out+y2_in)/2 + 0.5*bar_length_BC*math.sin(math.radians(angle))+0.01*(length_OA+length_AB+1.6*length_BC), f"{force} N", fontsize=18, color="black", fontfamily='times new roman', ha='center')
   
-  baseline = -(math.sin(math.radians(angle))*bar_length_BC+BAR_WIDTH+0.8)
+  baseline = -((math.sin(math.radians(angle))*bar_length_BC)+BAR_WIDTH+0.6)
   ### Separator dashed line between OA and AB ###
   # Draw line
-  ax.plot([length_OA, length_OA], [-(math.sin(math.radians(angle))*length_BC+BAR_WIDTH+0.6), 2.2], linestyle="--", color="black")
+  ax.plot([length_OA, length_OA], [1.2*baseline, 2.2], linestyle="--", color="black")
   # Write text
-  ax.text(length_OA-0.145, baseline-0.4, "a", fontsize=16, color="black", fontfamily='times new roman', weight='bold')
+  ax.text(length_OA, 1.2*baseline-0.03*(length_OA+length_AB+1.6*length_BC), "a", fontsize=18, color="black", fontfamily='times new roman', weight='bold', ha='center')
 
   ### Distance measurements ###
   # Draw arrow for distance between OA
-  ax.arrow(0.2, baseline+0.4, length_OA-0.4, 0, head_width=0.2, head_length=0.2, color="black")
-  ax.arrow(length_OA-0.20, baseline+0.4, -length_OA+0.4, 0, head_width=0.2, head_length=0.2, color="black")
+  ax.arrow(0.2, baseline+0.4, length_OA-0.4, 0, head_width=arrow_head_width, head_length=arrow_head_length, color="black")
+  ax.arrow(length_OA-0.20, baseline+0.4, -length_OA+0.4, 0, head_width=arrow_head_width, head_length=arrow_head_length, color="black")
   # Write distance text
-  ax.text(length_OA/2, baseline-0.2, f"{length_OA} m", fontsize=18, color="black", fontfamily='times new roman', ha='center')
+  ax.text(length_OA/2, 1.1*baseline-0.01*(length_OA+length_AB+1.6*length_BC), f"{length_OA} m", fontsize=18, color="black", fontfamily='times new roman', ha='center')
 
   # Draw arrow for distance between AB
-  ax.arrow(length_OA+0.20, baseline+0.4, length_AB-0.4, 0, head_width=0.2, head_length=0.2, color="black")
-  ax.arrow(length_OA+length_AB-0.2, baseline+0.4, -length_AB+0.4, 0, head_width=0.2, head_length=0.2, color="black")
+  ax.arrow(length_OA+0.20, baseline+0.4, length_AB-0.4, 0, head_width=arrow_head_width, head_length=arrow_head_length, color="black")
+  ax.arrow(length_OA+length_AB-0.2, baseline+0.4, -length_AB+0.4, 0, head_width=arrow_head_width, head_length=arrow_head_length, color="black")
   # Write distance text
-  ax.text(length_OA+length_AB/2, baseline-0.2, f"{length_AB} m", fontsize=18, color="black", fontfamily='times new roman', ha='center')
+  ax.text(length_OA+length_AB/2, 1.1*baseline-0.01*(length_OA+length_AB+1.6*length_BC), f"{length_AB} m", fontsize=18, color="black", fontfamily='times new roman', ha='center')
 
   # Draw arrow for distance between BC
-  ax.arrow(length_OA+length_AB+0.25, baseline+0.4, length_BC-0.4, 0, head_width=0.2, head_length=0.2, color="black")
-  ax.arrow(length_OA+length_AB+length_BC-0.2, baseline+0.4, -length_BC+0.4, 0, head_width=0.2, head_length=0.2, color="black")
+  ax.arrow(length_OA+length_AB+0.25, baseline+0.4, length_BC-0.4, 0, head_width=arrow_head_width, head_length=arrow_head_length, color="black")
+  ax.arrow(length_OA+length_AB+length_BC-0.2, baseline+0.4, -length_BC+0.4, 0, head_width=arrow_head_width, head_length=arrow_head_length, color="black")
   # Write distance text
-  ax.text(length_OA+length_AB+length_BC/2, baseline-0.2, f"{length_BC} m", fontsize=18, color="black", fontfamily='times new roman', ha='center')
+  ax.text(length_OA+length_AB+length_BC/2, 1.1*baseline-0.01*(length_OA+length_AB+1.6*length_BC), f"{length_BC} m", fontsize=18, color="black", fontfamily='times new roman', ha='center')
 
   # Draw tick marks for separating distances
+  # offset = length_OA+length_AB+1.6*length_BC
   ax.plot([0,0], [baseline+0.2, baseline+0.6], color="black")
   ax.plot([length_OA, length_OA], [baseline+0.2, baseline+0.6], color="black")
   ax.plot([length_OA+length_AB, length_OA+length_AB], [baseline+0.2, baseline+0.6], color="black")
@@ -115,6 +118,6 @@ def generate_figure(length_OA, length_AB, length_BC, angle, force):
 
 
 if __name__ == "__main__":
-  fig, ax = generate_figure(3, 6, 4, 30, 1500)
+  fig, ax = generate_figure(2, 6, 6, 45, 1500)
   plt.savefig("q4.png", dpi=300, bbox_inches='tight')
   plt.show()
