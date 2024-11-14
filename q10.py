@@ -9,8 +9,8 @@ import math
 def generate_figure(length_OA, length_AB, length_BC):
   # Define constants
   BAR_WIDTH = 0.5
-  arrow_head_width = 0.2 #0.01*(length_OA+length_AB+1.6*length_BC)
-  arrow_head_length = 0.2 #0.01*(length_OA+length_AB+1.6*length_BC)
+  arrow_head_width = 0.3 #0.01*(length_OA+length_AB+1.6*length_BC)
+  arrow_head_length = 0.3 #0.01*(length_OA+length_AB+1.6*length_BC)
   triangle_width = 1
   line_width = 1
   circle_radius = 0.1
@@ -78,26 +78,28 @@ def generate_figure(length_OA, length_AB, length_BC):
   ax.text(length_OA+length_AB+0.8*triangle_width, -BAR_WIDTH-0.25, r"$\it{B}$", fontsize=18, color='black', ha='center', va='center', math_fontfamily='dejavuserif', fontfamily='times new roman')
   
   # Label distances
-  ax.plot([0, 0], [-triangle_height-BAR_WIDTH-2*circle_radius-0.5, -BAR_WIDTH], color='black', linewidth=1.5)
+  baseline = -triangle_height-BAR_WIDTH-2*circle_radius-1
 
+  ax.plot([0, 0], [-triangle_height-BAR_WIDTH-2*circle_radius-0.5, -BAR_WIDTH], color='black', linewidth=1.5)
+  
   ax.arrow(0, -triangle_height-BAR_WIDTH-2*circle_radius-0.3, length_OA-arrow_head_length, 0, head_width=arrow_head_width, head_length=arrow_head_length, color='black')
   ax.arrow(length_OA, -triangle_height-BAR_WIDTH-2*circle_radius-0.3, -(length_OA-arrow_head_length), 0, head_width=arrow_head_width, head_length=arrow_head_length, color='black')
-  ax.text(length_OA/2, -triangle_height-BAR_WIDTH-2*circle_radius-0.7, f"{label_OA} m", fontsize=18, color='black', ha='center', va='center', math_fontfamily='dejavuserif', fontfamily='times new roman')
+  ax.text(length_OA/2, baseline, f"{label_OA} m", fontsize=18, color='black', ha='center', va='center', math_fontfamily='dejavuserif', fontfamily='times new roman')
 
   ax.plot([length_OA, length_OA], [-triangle_height-BAR_WIDTH-2*circle_radius-0.5, -triangle_height-BAR_WIDTH-2*circle_radius-0.1], color='black', linewidth=1.5)
   ax.arrow(length_OA, -triangle_height-BAR_WIDTH-2*circle_radius-0.3, length_AB-arrow_head_length, 0, head_width=arrow_head_width, head_length=arrow_head_length, color='black')
   ax.arrow(length_OA+length_AB, -triangle_height-BAR_WIDTH-2*circle_radius-0.3, -(length_AB-arrow_head_length), 0, head_width=arrow_head_width, head_length=arrow_head_length, color='black')
-  ax.text(length_OA+length_AB/2, -triangle_height-BAR_WIDTH-2*circle_radius-0.7, f"{label_AB} m", fontsize=18, color='black', ha='center', va='center', math_fontfamily='dejavuserif', fontfamily='times new roman')
+  ax.text(length_OA+length_AB/2, baseline, f"{label_AB} m", fontsize=18, color='black', ha='center', va='center', math_fontfamily='dejavuserif', fontfamily='times new roman')
 
   ax.plot([length_OA+length_AB, length_OA+length_AB], [-triangle_height-BAR_WIDTH-2*circle_radius-0.5, -triangle_height-BAR_WIDTH-2*circle_radius-0.1], color='black', linewidth=1.5)
   ax.arrow(length_OA+length_AB, -triangle_height-BAR_WIDTH-2*circle_radius-0.3, length_BC-arrow_head_length, 0, head_width=arrow_head_width, head_length=arrow_head_length, color='black')
   ax.arrow(length_OA+length_AB+length_BC, -triangle_height-BAR_WIDTH-2*circle_radius-0.3, -(length_BC-arrow_head_length), 0, head_width=arrow_head_width, head_length=arrow_head_length, color='black')
-  ax.text(length_OA+length_AB+length_BC/2, -triangle_height-BAR_WIDTH-2*circle_radius-0.7, f"{label_BC} m", fontsize=18, color='black', ha='center', va='center', math_fontfamily='dejavuserif', fontfamily='times new roman')
+  ax.text(length_OA+length_AB+length_BC/2, baseline, f"{label_BC} m", fontsize=18, color='black', ha='center', va='center', math_fontfamily='dejavuserif', fontfamily='times new roman')
 
   ax.plot([total_length, total_length], [-triangle_height-BAR_WIDTH-2*circle_radius-0.5, -BAR_WIDTH], color='black', linewidth=1.5)
   return fig, ax
 
 if __name__ == "__main__":
-  fig, ax = generate_figure(10,85,20)
+  fig, ax = generate_figure(10000,3000,20)
   plt.savefig("q10.png", dpi=300, bbox_inches='tight')
   plt.show()
