@@ -119,7 +119,7 @@ def generate_figure(length_OA, length_AB, length_BC, angle, force):
   # Draw arc
   ax.add_patch(Arc(((x2_out+x2_in)/2, (y2_out+y2_in)/2), 0.5*bar_length_BC, 0.5*bar_length_BC, angle=0, theta1=0, theta2=angle, color="black"))
   # Draw arrow at the end of the arc pointing in the direction of angle theta2
-  ax.arrow((x2_out+x2_in)/2, (y2_out+y2_in)/2, 0.5*bar_length_BC*math.cos(math.radians(angle)), 0.5*bar_length_BC*math.sin(math.radians(angle)), head_width=arrow_head_width, head_length=arrow_head_length, color="black", linewidth=line_width)
+  ax.arrow((x2_out+x2_in)/2, (y2_out+y2_in)/2, 0.5*bar_length_BC*math.cos(math.radians(angle)), 0.5*bar_length_BC*math.sin(math.radians(angle)), head_width=arrow_head_width, head_length=1.5*arrow_head_length, color="black", linewidth=line_width)
   # Write Force at the end of arrow
   ax.text((x2_out+x2_in)/2 + 0.6*bar_length_BC*math.cos(math.radians(angle)), (y2_out+y2_in)/2 + 0.2 + 0.5*bar_length_BC*math.sin(math.radians(angle))+0.01*(length_OA+length_AB+1.6*length_BC), f"{force} N", fontsize=18, color="black", fontfamily='times new roman', ha='center')
   
