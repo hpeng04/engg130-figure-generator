@@ -26,7 +26,7 @@ def generate_figure(length_AC, length_CB, height_AD, force_B, moment_C):
     return ax
   
   # Define constants
-  BAR_WIDTH = 0.5
+  BAR_WIDTH = 0.7
   arrow_head_width = 0.3 
   arrow_head_length = 0.4 
   triangle_width = 1
@@ -72,18 +72,20 @@ def generate_figure(length_AC, length_CB, height_AD, force_B, moment_C):
   # Bar DC
   angle = math.degrees(math.atan(height_AD/length_AC))
   length_DC = math.sqrt(length_AC**2 + height_AD**2)
-  ax.add_patch(Rectangle((0, -height_AD), length_DC, BAR_WIDTH*0.7, facecolor='black', edgecolor='black', linewidth=line_width, angle=angle))
+  # ax.plot([-BAR_WIDTH/2*math.sin(math.radians(angle)), length_AC-BAR_WIDTH/2*math.sin(math.radians(angle))], [-height_AD+BAR_WIDTH/2*math.cos(math.radians(angle)), BAR_WIDTH/2*math.cos(math.radians(angle))], color='black')
+  # ax.plot([BAR_WIDTH/2*math.sin(math.radians(angle)), length_AC+BAR_WIDTH/2*math.sin(math.radians(angle))], [-height_AD-BAR_WIDTH/2*math.cos(math.radians(angle)), -BAR_WIDTH/2*math.cos(math.radians(angle))], color='black')
+  ax.fill([BAR_WIDTH*0.3*math.sin(math.radians(angle)), -BAR_WIDTH*0.3*math.sin(math.radians(angle)), length_AC-BAR_WIDTH*0.3*math.sin(math.radians(angle)), length_AC+BAR_WIDTH*0.3*math.sin(math.radians(angle))], [-height_AD-BAR_WIDTH*0.3*math.cos(math.radians(angle)), -height_AD+BAR_WIDTH*0.3*math.cos(math.radians(angle)), BAR_WIDTH*0.3*math.cos(math.radians(angle)), -BAR_WIDTH*0.3*math.cos(math.radians(angle))], color='black')
 
   # Support at left end
-  height_offset = height_AD - 0.7*BAR_WIDTH*math.sin(math.radians(angle))
+  height_offset = height_AD
   ax.add_patch(Polygon([[-triangle_height, triangle_width/2], [0,0], [-triangle_height, -triangle_width/2]], closed=True, facecolor='grey', edgecolor='black', linewidth=line_width))
   ax.add_patch(Rectangle([-triangle_height-0.3, -triangle_width/2-0.3], 0.3, triangle_width+0.6, facecolor='white', edgecolor='black', linewidth=line_width, hatch='////////'))
   ax.add_patch(Polygon([[-triangle_height, triangle_width/2-height_offset], [0,-height_offset], [-triangle_height, -triangle_width/2-height_offset]], closed=True, facecolor='grey', edgecolor='black', linewidth=line_width))
   ax.add_patch(Rectangle([-triangle_height-0.3, -triangle_width/2-0.3-height_offset], 0.3, triangle_width+0.6, facecolor='white', edgecolor='black', linewidth=line_width, hatch='////////'))
 
   # Joints
-  ax.add_patch(Circle((length_AC-0.7*BAR_WIDTH*math.sin(math.radians(angle)), 0), circle_radius, facecolor='white', edgecolor='black', linewidth=line_width))
-  ax.add_patch(Circle((0, -height_AD+0.7*BAR_WIDTH*math.sin(math.radians(angle))), circle_radius, facecolor='white', edgecolor='black', linewidth=line_width))
+  ax.add_patch(Circle((length_AC, 0), circle_radius, facecolor='white', edgecolor='black', linewidth=line_width))
+  ax.add_patch(Circle((0, -height_AD), circle_radius, facecolor='white', edgecolor='black', linewidth=line_width))
 
   # Forces
   ax.arrow(total_width, BAR_WIDTH/2+1.5+arrow_head_length+0.1, 0, -1.5, head_width=arrow_head_width, head_length=arrow_head_length, width=0.05, color='black')
@@ -97,7 +99,7 @@ def generate_figure(length_AC, length_CB, height_AD, force_B, moment_C):
   ax.text(total_width, -BAR_WIDTH/2-0.8, 'B', fontsize=22, ha='center', va='center', color='black', fontfamily='times new roman', weight='bold')
 
   # Distance markers
-  AC_offset = length_AC-0.7*BAR_WIDTH*math.sin(math.radians(angle))
+  AC_offset = length_AC
   vert_offset = arrow_head_length+0.2
   ax.plot([0, 0], [2+vert_offset, 3+vert_offset], color='black', linewidth=line_width)
   doublearrow(ax, 0, 2.5+vert_offset, AC_offset, 0, head_width=arrow_head_width, head_length=arrow_head_length)
