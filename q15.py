@@ -6,7 +6,7 @@ from matplotlib.patches import Rectangle
 import numpy as np
 import math
 
-
+# limits: numbers less than 9999999999 (ten 9s) and greater than 0
 
 def generate_figure(length_AC, length_CB, height_AD, force_B, moment_C):
 
@@ -44,8 +44,8 @@ def generate_figure(length_AC, length_CB, height_AD, force_B, moment_C):
     length_AC = 0.15*total_width
   elif (length_AC/total_width > 0.85):
     length_AC = 0.85*total_width
-  if (height_AD/total_width < 0.10):
-    height_AD = 1
+  if (height_AD/total_width < 0.20):
+    height_AD = 0.20*total_width
   elif (height_AD/total_width > 0.7):
     height_AD = 0.7*total_width
   if (length_CB/total_width < 0.15):
@@ -119,6 +119,6 @@ def generate_figure(length_AC, length_CB, height_AD, force_B, moment_C):
   return fig, ax
 
 if __name__ == "__main__":
-  fig, ax = generate_figure(1,1,1,800,400)
+  fig, ax = generate_figure(10000000000,10000000000,1500000000,400000000,6)
   plt.savefig("q15.png", dpi=300, bbox_inches='tight')
   plt.show()
