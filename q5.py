@@ -6,7 +6,7 @@ from matplotlib.patches import Rectangle
 import numpy as np
 import math
 
-def generate_figure(length_OA, length_AB, length_BC, force_AB, force_BC, force_BC_angle):
+def generate_figure(length_OA, length_AB, length_BC, force_AB, force_C, force_C_angle):
   # Define constants
   BAR_WIDTH = 0.5
   arrow_head_width = 0.3 
@@ -81,12 +81,12 @@ def generate_figure(length_OA, length_AB, length_BC, force_AB, force_BC, force_B
   ax.text(length_OA+arrow_head_width/2, length_AB+1.5/2+arrow_head_length+BAR_WIDTH/2, f"{force_AB} N", fontsize=18, color='black', ha='left', va='bottom', math_fontfamily='dejavuserif', fontfamily='times new roman')
   # Force on tip of bar BC
   arrow_length = 1.7
-  arrow_xlen = -arrow_length*math.sin(math.radians(force_BC_angle))
-  arrow_ylen = arrow_length*math.cos(math.radians(force_BC_angle))
-  ax.arrow(length_OA+length_BC+(arrow_head_length)*math.sin(math.radians(force_BC_angle))-arrow_xlen+0.1+BAR_WIDTH/2, length_AB-(arrow_head_length)*math.cos(math.radians(force_BC_angle))-arrow_ylen, arrow_xlen, arrow_ylen, head_width=arrow_head_width, head_length=arrow_head_length, color='black')
-  ax.add_patch(Arc((length_OA+length_BC+BAR_WIDTH/2, length_AB), 2, 2, angle=270, theta1=-10, theta2=force_BC_angle, color='black'))
-  ax.text(length_OA+length_BC+(arrow_head_length)*math.sin(math.radians(force_BC_angle))+0.5+BAR_WIDTH/2, length_AB-(arrow_head_length)*math.cos(math.radians(force_BC_angle))-0.2*arrow_ylen, f"{force_BC} N", fontsize=18, color='black', ha='left', va='bottom', math_fontfamily='dejavuserif', fontfamily='times new roman')
-  ax.text(length_OA+length_BC+0.5-arrow_xlen/2, length_AB-(arrow_head_length)*math.cos(math.radians(force_BC_angle))-arrow_ylen-1.5, f"{force_BC_angle}\u00B0", fontsize=18, color='black', ha='center', va='bottom', fontfamily='times new roman')
+  arrow_xlen = -arrow_length*math.sin(math.radians(force_C_angle))
+  arrow_ylen = arrow_length*math.cos(math.radians(force_C_angle))
+  ax.arrow(length_OA+length_BC+(arrow_head_length)*math.sin(math.radians(force_C_angle))-arrow_xlen+0.1+BAR_WIDTH/2, length_AB-(arrow_head_length)*math.cos(math.radians(force_C_angle))-arrow_ylen, arrow_xlen, arrow_ylen, head_width=arrow_head_width, head_length=arrow_head_length, color='black')
+  ax.add_patch(Arc((length_OA+length_BC+BAR_WIDTH/2, length_AB), 2, 2, angle=270, theta1=-10, theta2=force_C_angle, color='black'))
+  ax.text(length_OA+length_BC+(arrow_head_length)*math.sin(math.radians(force_C_angle))+0.5+BAR_WIDTH/2, length_AB-(arrow_head_length)*math.cos(math.radians(force_C_angle))-0.2*arrow_ylen, f"{force_C} N", fontsize=18, color='black', ha='left', va='bottom', math_fontfamily='dejavuserif', fontfamily='times new roman')
+  ax.text(length_OA+length_BC+0.5-arrow_xlen/2, length_AB-(arrow_head_length)*math.cos(math.radians(force_C_angle))-arrow_ylen-1.5, f"{force_C_angle}\u00B0", fontsize=18, color='black', ha='center', va='bottom', fontfamily='times new roman')
 
   # Draw distance markers
   # Width
@@ -103,7 +103,7 @@ def generate_figure(length_OA, length_AB, length_BC, force_AB, force_BC, force_B
   
   #Height
   ax.plot([-2, 1.5], [0, 0], color='black', linewidth=line_width, linestyle="--")
-  ax.plot([-2, total_width], [length_AB, length_AB], color='black', linewidth=line_width, linestyle="--")
+  ax.plot([-2, total_width-0.25], [length_AB, length_AB], color='black', linewidth=line_width, linestyle="--")
   ax.arrow(-2, 0, 0, length_AB-arrow_head_length, head_width=arrow_head_width, head_length=arrow_head_length, color='black')
   ax.arrow(-2, length_AB, 0, -(length_AB-arrow_head_length), head_width=arrow_head_width, head_length=arrow_head_length, color='black')
   ax.text(-2.2, length_AB/2, f"{label_AB} m", fontsize=18, color='black', ha='right', va='center', fontfamily='times new roman')
