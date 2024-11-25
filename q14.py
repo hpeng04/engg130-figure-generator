@@ -151,7 +151,7 @@ def generate_figure(length_X, length_Y, length_Z, Fz, Fy):
     ax.plot3D(x_coords, y_coords, z_coords, color="black", linewidth=LINE_WIDTH, linestyle='--', zorder=8)
 
   # Plot X axis
-  ax.text(vertices['X_axis_start'][0]-0.04, vertices['X_axis_start'][1]-0.04, vertices['X_axis_start'][2], r"$\it{x}$", color="black", fontsize=20, math_fontfamily='cm', ha='right', fontfamily='times new roman')
+  ax.text(vertices['X_axis_start'][0]-0.06, vertices['X_axis_start'][1]-0.03, vertices['X_axis_start'][2], r"$\it{x}$", color="black", fontsize=20, math_fontfamily='cm', ha='right', fontfamily='times new roman')
   ax.plot([vertices['X_axis_start'][0], vertices['X_axis_end'][0]], [vertices['X_axis_start'][1], vertices['X_axis_end'][1]], [vertices['X_axis_start'][2], vertices['X_axis_end'][2]], color="black", linewidth=LINE_WIDTH, zorder=4)
   ax.plot([vertices['X_axis_start'][0], vertices['X_axis_end'][0]], [vertices['X_axis_start'][1], vertices['X_axis_end'][1]], [vertices['X_axis_start'][2], vertices['X_axis_end'][2]], color="black", linewidth=LINE_WIDTH, zorder=10, linestyle='-.')
 
@@ -201,6 +201,6 @@ def generate_figure(length_X, length_Y, length_Z, Fz, Fy):
   return fig, ax
 
 if __name__ == "__main__":
-  fig, ax = generate_figure(5.700, 0.005, 0.50, 100, 100)
+  fig, ax = generate_figure(0.70, 0.65, 0.50, 100, 100)
   plt.savefig("q14.png", dpi=300, bbox_inches='tight')
   plt.show()
