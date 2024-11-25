@@ -47,7 +47,7 @@ def generate_figure(angle, mass):
   surface_length_y = SURFACE_LENGTH*np.sin(np.radians(angle))
   HATCH_LENGTH = SURFACE_LENGTH-0.7/surface_length_y
   ax.plot([-GROUND_DISPLACEMENT-surface_length_x, -GROUND_DISPLACEMENT], [surface_length_y, 0], color='black', linewidth=LINE_WIDTH)
-  ax.add_patch(Rectangle((-GROUND_DISPLACEMENT-surface_length_x, surface_length_y), BAR_WIDTH, HATCH_LENGTH, facecolor='none', edgecolor='black', linewidth=0, hatch=r'|||', angle=-angle-90, rotation_point='xy', alpha=0.7, zorder=1))
+  ax.add_patch(Rectangle((-GROUND_DISPLACEMENT-surface_length_x, surface_length_y), BAR_WIDTH, HATCH_LENGTH, facecolor='none', edgecolor='black', linewidth=0, hatch=r'////', angle=-angle-90, rotation_point='xy', alpha=0.7, zorder=1))
   
   # Draw angle
   ANGLE_TEXT_OFFSET_Y = 0.5*SURFACE_LENGTH*np.sin(np.radians(angle/4))-0.6*HATCH_OFFSET*np.sin(np.radians(angle))
@@ -80,6 +80,6 @@ def generate_figure(angle, mass):
   return fig, ax
 
 if __name__ == "__main__":
-  fig, ax = generate_figure(10, 100000)
+  fig, ax = generate_figure(30, 100000)
   plt.savefig("q8.png", dpi=300, bbox_inches='tight')
   plt.show()
