@@ -10,8 +10,8 @@ def generate_figure(A_width, B_width, force_angle, force_B):
   # Define constants
   LINE_WIDTH = 1
   ARC_DIAMETER = 1
-  BAR_LENGTH = 4
-  BAR_HEIGHT = 3
+  BAR_LENGTH = 3
+  BAR_HEIGHT = 2
   ARROW_HEAD_LENGTH = 0.08
   ARROW_HEAD_WIDTH = 0.08
   ARROW_LENGTH = 1 - ARROW_HEAD_LENGTH
