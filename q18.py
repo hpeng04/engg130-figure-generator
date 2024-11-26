@@ -49,8 +49,8 @@ def generate_figure(A_width, B_width, force_angle, force_B):
 
   total_width = A_width + B_width
 
-  if (force_angle < 30):
-    force_angle = 30
+  if (force_angle < 25):
+    force_angle = 25
 
   # Draw L beam outline
   ax.plot([0, 0], [0, -A_width], color='black', linewidth=LINE_WIDTH)
