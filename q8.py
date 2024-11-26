@@ -1,11 +1,8 @@
 import matplotlib.pyplot as plt
 from matplotlib.patches import Arc
-from matplotlib.patches import Polygon
 from matplotlib.patches import Circle
 from matplotlib.patches import Rectangle
-from sympy import symbols, Eq, solve
 import numpy as np
-import math
 
 # Limits: angle between 10 and 75 degrees
 #         mass less than 6 digits
@@ -20,16 +17,16 @@ def generate_figure(angle, mass):
   
   angle_label = angle
 
-  if (angle < 20):
-    angle = 20
-  elif (angle > 60):
-    angle = 60
+  if (angle < 15):
+    angle = 15
+  elif (angle > 70):
+    angle = 70
 
   # Set up the figure and axis
   fig, ax = plt.subplots(figsize=(10, 5))
   ax.set_aspect('equal')
-  ax.set_xlim(-10, 2)
-  ax.set_ylim(-1, 5)
+  # ax.set_xlim(-10, 2)
+  # ax.set_ylim(-1, 5)
   ax.axis('off')
 
   # Draw right wall
@@ -50,8 +47,10 @@ def generate_figure(angle, mass):
   ax.add_patch(Rectangle((-GROUND_DISPLACEMENT-surface_length_x, surface_length_y), BAR_WIDTH, HATCH_LENGTH, facecolor='none', edgecolor='black', linewidth=0, hatch=r'////', angle=-angle-90, rotation_point='xy', alpha=0.7, zorder=1))
   
   # Draw angle
+  # ANGLE_TEXT_OFFSET_Y = ARC_RADIUS*np.sin(np.radians(angle/2-10))
+  # ANGLE_TEXT_OFFSET_X = -GROUND_DISPLACEMENT-ARC_RADIUS*np.cos(np.radians(angle/2-10))
   ANGLE_TEXT_OFFSET_Y = 0.5*SURFACE_LENGTH*np.sin(np.radians(angle/4))-0.6*HATCH_OFFSET*np.sin(np.radians(angle))
-  ANGLE_TEXT_OFFSET_X = -GROUND_DISPLACEMENT-0.6*SURFACE_LENGTH*np.cos(np.radians(angle))
+  ANGLE_TEXT_OFFSET_X = -GROUND_DISPLACEMENT-0.65*SURFACE_LENGTH*np.cos(np.radians(angle))
   ax.add_patch(Arc((-GROUND_DISPLACEMENT, 0), ARC_RADIUS, ARC_RADIUS, angle=180-angle, theta1=0, theta2=angle, color='black', linewidth=LINE_WIDTH, zorder=2))
   ax.text(ANGLE_TEXT_OFFSET_X, ANGLE_TEXT_OFFSET_Y, f'{angle_label}°', fontsize=18, ha='right', va='bottom', fontfamily='times new roman')
 
@@ -80,6 +79,6 @@ def generate_figure(angle, mass):
   return fig, ax
 
 if __name__ == "__main__":
-  fig, ax = generate_figure(30, 100000)
+  fig, ax = generate_figure(70, 10)
   plt.savefig("q8.png", dpi=300, bbox_inches='tight')
   plt.show()
