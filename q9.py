@@ -1,11 +1,8 @@
 import matplotlib.pyplot as plt
 from matplotlib.patches import Arc
-from matplotlib.patches import Polygon
 from matplotlib.patches import Circle
 from matplotlib.patches import Rectangle
-from sympy import symbols, Eq, solve
 import numpy as np
-import math
 
 # Limits: angle between 10 and 70 degrees
 
@@ -30,8 +27,8 @@ def generate_figure(angle_A, angle_B):
   # Set up the figure and axis
   fig, ax = plt.subplots(figsize=(10, 5))
   ax.set_aspect('equal')
-  ax.set_xlim(-1, AB_DIST+1)
-  ax.set_ylim(-17, 1)
+  # ax.set_xlim(-1, AB_DIST+1)
+  # ax.set_ylim(-17, 1)
   ax.axis('off')
   
   # Draw bar
