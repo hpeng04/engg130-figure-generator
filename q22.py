@@ -1,8 +1,7 @@
 import matplotlib.pyplot as plt
-from matplotlib.patches import Rectangle, Arc, Circle, Polygon, PathPatch
+from matplotlib.patches import Arc, Circle, Polygon
 import matplotlib.path as mpath
 import numpy as np
-import math
 
 # Limits: angles between 0 and 90 degrees exclusive
 
@@ -18,7 +17,6 @@ def generate_figure(angle_A, angle_B, force):
   PULLEY_RADIUS = 0.6
   ARC_DIAMETER = PULLEY_RADIUS*2
   ARROW_LENGTH = 1 - ARROW_HEAD_LENGTH
-  ARROW_WIDTH = 0.1 * ARROW_HEAD_WIDTH
   PULLEY_Y_OFFSET = 0.8
   ANGLE_DIAMETER = 2.7
 
