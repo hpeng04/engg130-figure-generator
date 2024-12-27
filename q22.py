@@ -4,7 +4,7 @@ import matplotlib.path as mpath
 import numpy as np
 import math
 
-# Limits: 
+# Limits: angles between 0 and 90 degrees exclusive
 
 def generate_figure(angle_A, angle_B, force):
   
