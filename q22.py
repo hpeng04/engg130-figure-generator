@@ -50,8 +50,6 @@ def generate_figure(angle_A, angle_B, force):
   # Set up the figure and axis
   fig, ax = plt.subplots(figsize=(7, 7))
   ax.set_aspect('equal')
-  # ax.set_xlim(-1, 6)
-  # ax.set_ylim(-5, 1)
   ax.axis('off')
 
   # Draw the frame
@@ -59,10 +57,10 @@ def generate_figure(angle_A, angle_B, force):
   ax.plot([0,0], [0, -anchor_y_offset-1.0], color='black', linewidth=FRAME_WIDTH, zorder=10)
 
   # Draw directions
-  ax.arrow(-pulley_x_offset-2, -anchor_y_offset-1.0, 0.5, 0, head_width=ARROW_HEAD_WIDTH, head_length=ARROW_HEAD_LENGTH, fc='black', ec='black', linewidth=LINE_WIDTH, zorder=10)
-  ax.text(-pulley_x_offset-2+ARROW_HEAD_WIDTH, -anchor_y_offset-1+0.5, r'$\it{y}$', fontsize=18, ha='left', va='center', math_fontfamily='cm')
-  ax.arrow(-pulley_x_offset-2, -anchor_y_offset-1.0, 0, 0.5, head_width=ARROW_HEAD_WIDTH, head_length=ARROW_HEAD_LENGTH, fc='black', ec='black', linewidth=LINE_WIDTH, zorder=10)
-  ax.text(-pulley_x_offset-2+0.5+ARROW_HEAD_LENGTH, -anchor_y_offset-1, r'$\it{x}$', fontsize=18, ha='left', va='center', math_fontfamily='cm')
+  ax.arrow(-pulley_x_offset-3, -anchor_y_offset-2.0, 0.5, 0, head_width=ARROW_HEAD_WIDTH, head_length=ARROW_HEAD_LENGTH, fc='black', ec='black', linewidth=LINE_WIDTH, zorder=10)
+  ax.text(-pulley_x_offset-3+ARROW_HEAD_WIDTH, -anchor_y_offset-2+0.5, r'$\it{y}$', fontsize=18, ha='left', va='center', math_fontfamily='cm')
+  ax.arrow(-pulley_x_offset-3, -anchor_y_offset-2.0, 0, 0.5, head_width=ARROW_HEAD_WIDTH, head_length=ARROW_HEAD_LENGTH, fc='black', ec='black', linewidth=LINE_WIDTH, zorder=10)
+  ax.text(-pulley_x_offset-3+0.5+ARROW_HEAD_LENGTH, -anchor_y_offset-2, r'$\it{x}$', fontsize=18, ha='left', va='center', math_fontfamily='cm')
 
 
   # Draw pulley
@@ -130,6 +128,6 @@ def generate_figure(angle_A, angle_B, force):
 
 
 if __name__ == "__main__":
-  fig, ax = generate_figure(25, 3, 500)
+  fig, ax = generate_figure(25, 60, 500)
   plt.savefig("q22.png", dpi=300, bbox_inches='tight')
   plt.show()
