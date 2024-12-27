@@ -132,6 +132,6 @@ def generate_figure(angle_A, angle_B, force):
 
 
 if __name__ == "__main__":
-  fig, ax = generate_figure(25, 30, 500)
+  fig, ax = generate_figure(25, 3, 500)
   plt.savefig("q22.png", dpi=300, bbox_inches='tight')
   plt.show()
